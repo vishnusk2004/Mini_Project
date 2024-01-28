@@ -1,0 +1,123 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini project</title>
+    <link rel="stylesheet" href="{% static "skill_matcher/css/main-style.css" %}">
+    <link rel="shortcut icon" href="{% static "skill_matcher/img/icon.png" %}" type="image/x-icon"
+    ><style>
+        html {
+            scroll-behavior: smooth;
+          }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="nav">
+            <div id="nav-logo">
+                <img id="page-logo"
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwZNR89LFJfaj6jqm06ovC1gzGxza16F9pdA&usqp=CAU"
+                    alt="logo">
+            </div>
+            <div class="nav-title">
+                <h1>MINI PROJECT</h1>
+            </div>
+            <div id="nav-button">
+                <h4><a href="{% url 'index' %}">Home</a></h4>
+                <h4><a href="{% url 'mainpage' %}">Try</a></h4>
+                <h4><a href="#contact-info">Contact</a></h4>
+                <h4><a href="#mainpage-feedback">Feed back</a></h4>
+                <h4><a href="{% url 'documentation' %}">Documentation</a></h4>
+            </div>
+        </div>
+        <hr color="">
+        <div class="user-input-container">
+            <h3></h3>
+            <div id="iframe-container">
+                <div class="iframe-container">
+                    <iframe id="input-iframe" src="{% url 'input' %}" scrolling="no"></iframe>
+                </div>
+                <div class="iframe-container">
+                    <iframe id="output-iframe" src="{% url 'output' %}"></iframe>
+                </div>
+            </div>
+        </div>
+        <hr color="">
+        <div class="footer">
+            <div id="contact-info">
+                <div class="contact-title">
+                    <h3>For Contact:</h3>
+                </div>
+                <div class="contact-text">
+                    <p>For any problem or quries you can contact us on</p>
+                </div>
+                <div class="contact-number">
+                    <h4>Phone-no:</h4>
+                    <p>1234567890</p>
+                </div>
+                <div class="contact-email">
+                    <h4>Email us on: </h4>
+                    <a id="email-address" href="mailto:kumarsravan2004@gmail.com, judahlegy@gmail.com"> Email</a>
+                </div>
+            </div>
+            <div class="feedback-form">
+                <div id="mainpage-feedback">
+                    <h3>Enter your feedback here:</h3>
+                    <form action="#">
+                        <label for="feedback"></label>
+                        <textarea name="feedback" id="feedback" cols="30" rows="10"></textarea>
+                    </form>
+                    <div class="submit-button">
+                        <a href="#">Submit</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const outputIframe = document.getElementById('output-iframe');
+        window.addEventListener('message',e=>{
+            setTimeout(function() {
+                reloadIframes()
+            }, 2000);
+        });
+        function reloadIframes() {
+            outputIframe.contentWindow.location.reload();  // Reload the iframe
+        }
+    </script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
+    <script>
+        const lenis = new Lenis()
+
+        lenis.on('scroll', (e) => {
+        console.log(e)
+        })
+
+        function raf(time) {
+        lenis.raf(time)
+        requestAnimationFrame(raf)
+        }
+
+        requestAnimationFrame(raf)
+    </script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
+    <script>
+        const lenis = new Lenis()
+
+        lenis.on('scroll', (e) => {
+        console.log(e)
+        })
+
+        function raf(time) {
+        lenis.raf(time)
+        requestAnimationFrame(raf)
+        }
+
+        requestAnimationFrame(raf)
+    </script>
+</body>
+</html>

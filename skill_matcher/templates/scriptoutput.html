@@ -1,0 +1,224 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <style>
+      @font-face {
+        font-family: neu;
+        src: url("{% static 'skill_matcher/css/NeueHaasDisplayMediu.ttf' %}");
+      }
+      body{
+        font-family:neu;
+      }
+    </style>
+    {% if matched %}
+      {% for match in matched %}
+        <style>
+          .table_row_main_{{ forloop.counter }}{
+            cursor: pointer;
+            user-select: none;
+          }
+        </style>
+      {% endfor %}
+    {% endif %}
+    </head>
+    <body>
+      {% if matched %}
+        {% for match in matched %}
+        <div style="padding:10px;text-align: center;">
+          <table class="table table-hover mx-auto table-striped-columns" >
+            <thead>
+              <tr>
+                <th scope="col" class="table_row_main_{{ forloop.counter }}">Company Name (click me)</th>
+                <th scope="col">{{ match.company_name }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="table_row{{ forloop.counter }} d-table-row visible">
+                <td>Job Title</td>
+                <td>{{ match.job_title }}</td>
+              </tr>
+              <tr class="table_row{{ forloop.counter }} d-table-row visible">
+                <td>Your Matched Skill(s)</td>
+                <td>
+                  {% if match.matched_skills %}
+                    {% for skill in match.matched_skills %}
+                      {% if not forloop.last %}
+                        {{ skill }}, 
+                      {% else %}
+                        {{ skill }}.
+                      {% endif %}
+                    {% endfor %}
+                  {% else %}
+                    None
+                  {% endif %}
+                </td>
+              </tr>
+              <tr class="table_row{{ forloop.counter }} d-table-row visible">
+                <td>Your Unmatched Skill(s)</td>
+                <td>
+                  {% if match.unmatched_skills %}
+                    {% for skill in match.unmatched_skills %}
+                      {% if not forloop.last %}
+                        {{ skill }}, 
+                      {% else %}
+                        {{ skill }}.
+                      {% endif %}
+                    {% endfor %}
+                  {% else %}
+                    None
+                  {% endif %}
+                </td>
+              <tr class="table_row{{ forloop.counter }} d-table-row visible">
+                <td>Your Skills Match in %</td>
+                <td>{{ match.match_percentage }} %</td>
+              </tr>
+              <tr class="table_row{{ forloop.counter }} d-table-row visible">
+                <td>Lacking Skills That Company Requires</td>
+                <td>
+                  {% if match.Skills_lacking %}
+                    {% for skill in match.Skills_lacking %}
+                      {% if not forloop.last %}
+                        {{ skill }}, 
+                      {% else %}
+                        {{ skill }}.
+                      {% endif %}
+                    {% endfor %}
+                  {% else %}
+                    None
+                  {% endif %}
+                </td>
+              </tr>
+              <tr class="table_row{{ forloop.counter }} d-table-row visible">
+                <td>No.of Lacking Skills That Company Requires</td>
+                <td>
+                  {{ match.lacking_count }}
+                </td>
+              </tr>
+              <tr class="table_row{{ forloop.counter }} d-table-row visible">
+                <td>Lacking Skills That Company Requires in %</td>
+                <td>{{ match.lacking_percentage }} %</td>
+              </tr>
+                <tr class="table_row{{ forloop.counter }} d-table-row visible">
+                  <td>Jobs in your Prefered Location {{ isEmpty }}</td>
+                  <td>
+                    {% if match.filtered_location %}
+                      {% for skill in match.filtered_location %}
+                        {% if not forloop.last %}
+                          {{ skill }}, 
+                        {% else %}
+                          {{ skill }}.
+                        {% endif %}
+                      {% endfor %}
+                    {% else %}
+                    You Don't Have a Prefered Location
+                    {% endif %}
+                  </td>
+                </tr>
+              <tr class="table_row{{ forloop.counter }} d-table-row visible">
+                <td>Your Experience </td>
+                <td>
+                  {{ match.Uexperience }}
+                </td>
+              </tr>
+              <tr class="table_row{{ forloop.counter }} d-table-row visible">
+                <td>Required Experience</td>
+                <td>
+                  {{ match.company_experience }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div style="display:flex;">
+            <canvas id="YChart_{{ forloop.counter }}" class="table_row_charts_{{ forloop.counter }} d-none invisible" style="width:100%;max-width:600px;margin: 0 auto;"></canvas>
+            <canvas id="CChart_{{ forloop.counter }}" class="table_row_charts_{{ forloop.counter }} d-none invisible" style="width:100%;max-width:600px;margin: 0 auto;"></canvas>
+          </div>
+          <hr>
+        </div>
+        {% endfor %}
+    {% endif %}
+        {% if matched %}
+        {% for match in matched %}
+        <script>
+          const YxValues_{{ forloop.counter }} = ["{% for skill in match.matched_skills %}{% if not forloop.last %}{{ skill }}, {% else %}{{ skill }}{% endif %}{% endfor %}","{% for skill in match.unmatched_skills %}{% if not forloop.last %}{{ skill }}, {% else %}{{ skill }}{% endif %}{% endfor %}"];
+          const YyValues_{{ forloop.counter }} = [{{ match.match_count }},{{ match.unmatch_count }}];
+          const YBarColors_{{ forloop.counter }} = ["#00aba9","#b91d47"];
+          new Chart("YChart_{{ forloop.counter }}", {
+            type: "pie",
+            data: {
+              labels: YxValues_{{ forloop.counter }},
+              datasets: [{
+                backgroundColor: YBarColors_{{ forloop.counter }},
+                data: YyValues_{{ forloop.counter }}
+              }]
+            },
+            options: {
+              title: {
+                display: true,
+                text: "Pie Chart for Your Skill Match"
+              }
+            }
+          });
+          
+          const CxValues_{{ forloop.counter }} = ["{% if match.Skills_lacking %}{% for skill in match.Skills_lacking %}{% if not forloop.last %}{{ skill }},{% else %}{{ skill }}.{% endif %}{% endfor %}{% else %}None{% endif %}","{{ match.user_skills }}"];
+          const CyValues_{{ forloop.counter }} = [{{ match.lacking_count }},{{ match.user_skill_count }}];
+          const CBarColors_{{ forloop.counter }} = ["#b91d47","#00aba9"];
+          new Chart("CChart_{{ forloop.counter }}", {
+            type: "pie",
+            data: {
+              labels: CxValues_{{ forloop.counter }},
+              datasets: [{
+                backgroundColor: CBarColors_{{ forloop.counter }},
+                data: CyValues_{{ forloop.counter }}
+              }]
+            },
+            options: {
+              title: {
+                display: true,
+                text: "Pie Chart for Skills lacking from Required Skills"
+              }
+            }
+          });
+          const c{{ forloop.counter }} = document.querySelectorAll(".table_row_charts_{{ forloop.counter }}");
+          const b{{ forloop.counter }} = document.querySelectorAll(".table_row{{ forloop.counter }}");
+          const a{{ forloop.counter }} = document.querySelector(".table_row_main_{{ forloop.counter }}");
+
+          a{{ forloop.counter }}.addEventListener("click", function(){
+            b{{ forloop.counter }}.forEach(function(ele){
+              ele.classList.toggle("d-none");
+              ele.classList.toggle("d-table-row");
+              ele.classList.toggle("visible");
+              ele.classList.toggle("invisible");
+            });
+            c{{ forloop.counter }}.forEach(function(cell){
+              cell.classList.toggle("d-none");
+              cell.classList.toggle("d-block");
+              cell.classList.toggle("visible");
+              cell.classList.toggle("invisible");
+            });
+          });
+        </script>
+      {% endfor %}
+    {% endif %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
+    <script>
+        const lenis = new Lenis()
+
+        lenis.on('scroll', (e) => {
+        console.log(e)
+        })
+
+        function raf(time) {
+        lenis.raf(time)
+        requestAnimationFrame(raf)
+        }
+
+        requestAnimationFrame(raf)
+    </script>
+  </body>
+</html>

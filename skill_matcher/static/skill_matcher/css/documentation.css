@@ -1,0 +1,199 @@
+body {
+    height: 100%;
+    font-family: neu;
+}
+
+@font-face {
+    font-family: neu;
+    src: url(./NeueHaasDisplayMediu.ttf);
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 2vw 2vw;
+    position: relative;
+    overflow: hidden;
+    z-index: 2;
+}
+
+#page-logo:hover {
+    transform: scale(1.1);
+    transition: 0.3s;
+}
+
+#nav-button {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    padding-right: 0px;
+    position: relative;
+    overflow: hidden;
+}
+
+
+#nav-button h4{
+    border: 2px solid black;
+    padding: 2px 5px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 500;
+    color: black;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+#nav-button a{
+    text-decoration: none;
+    color: black;
+}
+
+
+#nav-button a:hover {
+    color: white;
+    z-index: 2;
+}
+
+#nav-logo img{
+    width: 100px;
+    height: 100px;
+}
+
+#nav-button a::after {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    left: 0;
+    bottom: -100%;
+    border-radius: 50%;
+    transition: 0.3s ease;
+    z-index: 0;
+    overflow: hidden;
+}
+
+#nav-button a:hover::after {
+    bottom: 0;
+    border-radius: 0;
+    z-index: -1;
+}
+
+.nav-title {
+    font-size: 20px;
+}
+
+.center-container{
+    min-height: 70vh;
+}
+
+#documentation-title {
+    font-size: 7vh;
+    text-align: center;
+}
+
+.center-container-title {
+    font-size: 4vh;
+}
+
+.center-container p,ol,ul {
+    font-size: 3vh;
+    line-height: 6vh;
+}
+
+.getting-started {
+    display: flex;
+    justify-content: space-between;
+}
+
+.right-img-getting-started img{
+    width: 60vw;
+    height: 57vh;
+    padding-right: 2vw;
+    align-items: center;
+}
+
+.technical-architecture {
+    display: flex;
+    justify-content: space-between;
+}
+
+.right-img-tech-arch img{
+    width: 30vw;
+    height: 40vh;
+    padding-right: 2vw;
+    padding-top: 3vh;
+}
+
+
+
+
+
+
+
+
+
+
+.footer {
+    height: 50vh;
+    background-color: rgb(219, 213, 213);
+    display: flex;
+    justify-content: space-between;
+}
+
+#contact-info {
+    font-family: neu;
+    padding: 8px 0 0 20px;
+}
+
+.contact-title {
+    font-size: 1.4vw;
+}
+
+.contact-text {
+    padding-left: 0.9vw;
+}
+
+.contact-number h4{
+    font-size: 1.4vw;
+}
+
+.contact-email h4{
+    font-size: 1.4vw;
+}
+
+.contact-email {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.contact-email a{
+    text-decoration: none;
+}
+
+.contact-email a:hover{
+    color: red;
+}
+
+.feedback-form {
+    padding-right: 30px;
+}
+
+.submit-button {
+    width: 70px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid black;
+    border-radius: 50px;
+    margin: auto;
+    margin-top: 10px;
+}
+
+.submit-button a{
+    text-decoration: none;
+    color: black;
+}

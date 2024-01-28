@@ -1,0 +1,149 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini project</title>
+    <link rel="stylesheet" href="{% static 'skill_matcher/css/style.css' %}">
+    <link rel="shortcut icon" href="{% static 'skill_matcher/img/icon.png' %}" type="image/x-icon">
+</head>
+
+<body>
+    <div class="main-container">
+        <div class="container">
+            <div class="nav">
+                <div id="nav-logo">
+                    <img id="page-logo"
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwZNR89LFJfaj6jqm06ovC1gzGxza16F9pdA&usqp=CAU"
+                        alt="logo">
+                </div>
+                <div class="nav-title">
+                    <h1>MINI PROJECT</h1>
+                </div>
+                <div id="nav-button">
+                    <h4><a href="{% url 'index' %}">Home</a></h4>
+                    <h4><a href="{% url 'mainpage' %}">Try</a></h4>
+                    <h4><a href="#contact-info">Contact</a></h4>
+                    <h4><a href="#homepage-feedback">Feedback</a></h4>
+                    <h4><a href="{% url 'documentation' %}">Documentation</a></h4>
+                </div>
+            </div>
+            <hr color="">
+            <div class="center">
+                <div class="left-text">
+                    Are you looking for the perfect job that aligns with your skills? Look no further!
+                    Our Job Matchmaker is designed to connect you with the best-fitting companies based on your unique
+                    skill set.
+                </div>
+                <div class="right-text">
+                    <h1>JOB <br> MATCH <br> MAKING</h1>
+                </div>
+            </div>
+            <hr>
+            <div class="back-animation-container-2">
+                <div class="back-animation-1"></div>
+                <div class="back-animation-2"></div>
+                <div class="back-animation-3"></div>
+            </div>
+            <div class="video-container">
+                <video autoplay loop muted
+                    src="{% static 'skill_matcher/videos/WhatsApp Video 2024-01-13 at 16.40.20_a8c1d39e.mp4' %}"></video>
+            </div>
+            <div class="moving-text-container">
+                <div class="moving-text">
+                    <h3>AI-Powered Tech Job Matcher</h3>
+                    <h3>AI-Powered Tech Job Matcher</h3>
+                    <h3>AI-Powered Tech Job Matcher</h3>
+                </div>
+                <div class="moving-text">
+                    <h3>AI-Powered Tech Job Matcher</h3>
+                    <h3>AI-Powered Tech Job Matcher</h3>
+                    <h3>AI-Powered Tech Job Matcher</h3>
+                </div>
+                <div class="moving-text">
+                    <h3>AI-Powered Tech Job Matcher</h3>
+                    <h3>AI-Powered Tech Job Matcher</h3>
+                    <h3>AI-Powered Tech Job Matcher</h3>
+                </div>
+            </div>
+        </div>
+        <div class="container-2">
+            <div class="container-top">
+                <div class="container-2-left-text">
+                    Say goodbye to endless scrolling through job listings. With our Job Matchmaker, discover the
+                    companies that appreciate your talents and are in search of someone just like you. Take the next
+                    step in your career journey.
+                </div>
+                <div class="container-2-right-img">
+                    <img src="{% static 'skill_matcher/img/Man_looking_at_system.jpg' %}" alt="Man searching for job">
+                </div>
+            </div>
+            <div class="back-animation-container-3">
+                <div class="center-back-animation-1"></div>
+                <div class="center-back-animation-2"></div>
+                <div class="center-back-animation-3"></div>
+            </div>
+            <div class="container-try-button">
+                <div class="container-try-button-text">
+                    <p>Find your perfect job Today !!!</p>
+                </div>
+                <div class="try-button">
+                    <a href="{% url 'mainpage' %}">Try Now</a>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="jump-to-top">
+            <a href="#">Jump To Top</a>
+        </div>
+        <div class="footer">
+            <div id="contact-info">
+                <div class="contact-title">
+                    <h3>For Contact:</h3>
+                </div>
+                <div class="contact-text">
+                    <p>For any problem or quries you can contact us on</p>
+                </div>
+                <div class="contact-number">
+                    <h4>Phone-no:</h4>
+                    <p>1234567890</p>
+                </div>
+                <div class="contact-email">
+                    <h4>Email us on: </h4>
+                    <a id="email-address" href="mailto:kumarsravan2004@gmail.com, judahlegy@gmail.com"> Email</a>
+                </div>
+            </div>
+            <div class="feedback-form">
+                <div id="homepage-feedback">
+                    <h3>Enter your feedback here:</h3>
+                    <form action="#">
+                        <label for="feedback"></label>
+                        <textarea name="feedback" id="feedback" cols="30" rows="3"></textarea>
+                    </form>
+                    <div class="submit-button">
+                        <a href="#">Submit</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
+    <script>
+        const lenis = new Lenis()
+
+        lenis.on('scroll', (e) => {
+        console.log(e)
+        })
+
+        function raf(time) {
+        lenis.raf(time)
+        requestAnimationFrame(raf)
+        }
+
+        requestAnimationFrame(raf)
+    </script>
+</body>
+
+</html>
