@@ -5,7 +5,7 @@ Welcome to the documentation for our Job Search Website project. This document p
 
 ### Getting Started
 To get started with the Job Search Website, follow these steps:
-1. Visit the website URL [https://vishnusk2004.github.io/Mini_Project/].
+1. Visit the website URL [Job Match Maker](https://vishnusk2004.github.io/Mini_Project/).
 2. Navigate to the "Try" page to search for job listings based on your skills, location, and experience.
 
 ### Features
@@ -22,7 +22,7 @@ The Job Search Website is built using the following technologies:
 - Data Collection: Web scraping from job listing websites
 
 ### Installation and Setup
-Currently, the Job Search Website is not available for local installation. However, you can access it online at [https://vishnusk2004.github.io/Mini_Project/].
+Currently, the Job Search Website is not available for local installation. However, you can access it online at [Job Match Maker](https://vishnusk2004.github.io/Mini_Project/).
 
 ### Usage Examples
 1. To search for job listings, enter your skills, location, and experience on the "Try" page.
